@@ -9,7 +9,19 @@ var usersRouter = require('./routes/users');
 var healthRouter = require('./routes/health');
 
 var app = express();
-
+app.set('trust proxy', true);
+app.use((req, res, next) => {
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin, CSRF-Token, X-Requested-With, X-HTTP-Method-Override, Content-Type, Content-Disposition, Accept'
+  );
+  res.header('Access-Control-Expose-Headers', 'Content-Disposition,X-Suggested-Filename');
+  res.header('Access-Control-Allow-Methods', 'POST, GET, PUT, PATCH, DELETE, OPTIONS');
+  res.header('Access-Control-Allow-Credentials', true);
+  res.header('Access-Control-Max-Age', '86400');
+  res.header('Access-Control-Allow-Origin', '*');
+  next();
+});
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
