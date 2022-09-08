@@ -162,3 +162,6 @@ Session.vim
 /local
 /local/*
 .nvmrc
+
+# docker directory
+docker/
