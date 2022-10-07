@@ -1,0 +1,5 @@
+build/*.js
+db/*
+local/*
+node_modules/*
+secret/*
