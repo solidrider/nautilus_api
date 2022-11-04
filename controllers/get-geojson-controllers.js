@@ -2,7 +2,7 @@ const pgClient = require('../utils/pgClient');
 
 const client = pgClient;
 
-exports.get = async (req, res) => {
+exports.post = async (req, res) => {
   try {
     const table_name = req.body.name;
     const results = await client.query(
