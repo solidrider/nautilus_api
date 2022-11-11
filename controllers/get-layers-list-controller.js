@@ -5,7 +5,7 @@ const client = pgClient;
 exports.get = async (req, res) => {
   try {
     const results = await client.query(
-      `select "id","table_name","title","geom_type","is_choropleth" from layer`
+      `select "id","table_name","title","geom_type","is_choropleth" from layer WHERE is_delete=false`
     );
     // console.log(results.rows);
     // await client.end();

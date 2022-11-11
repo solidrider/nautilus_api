@@ -12,7 +12,9 @@ exports.post = async (req, res) => {
         )
       FROM ${table_name} as t`
     );
-    console.log(results.rows);
+    results.rows[0].json_build_object.features.map(e => {
+      e.properties.reversed_value = e.properties.value * -1;
+    });
     // client.end();
     return res.status(200).json(results.rows);
   } catch (e) {

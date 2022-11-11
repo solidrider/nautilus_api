@@ -10,13 +10,13 @@ exports.post = async (req, res) => {
     const items = req.body.layer;
     console.log(items);
     const promises = items.map(item => {
-      const value = client.query(`SELECT value FROM ${item}
+      const result = client.query(`SELECT value,rank::integer FROM ${item}
       WHERE ST_Contains(
           geom,
           'SRID=4612;POINT(
             ${long} ${lat})'::geometry
       );`);
-      return value;
+      return result;
     });
     const results = await Promise.all(promises);
     return res.status(200).json(results);
