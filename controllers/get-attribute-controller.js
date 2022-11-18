@@ -10,9 +10,15 @@ exports.post = async (req, res) => {
     const items = req.body.layer;
     console.log(items);
     const promises = items.map(item => {
-      const result = client.query(`SELECT value,rank::integer FROM ${item}
+      const result = client.query(`
+      SELECT value,rank::integer
+      FROM ${item}
+      INNER JOIN
+        prefecture
+      ON
+      ${item}.id = prefecture.id
       WHERE ST_Contains(
-          geom,
+        prefecture.geom,
           'SRID=4612;POINT(
             ${long} ${lat})'::geometry
       );`);
